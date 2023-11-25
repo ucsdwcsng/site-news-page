@@ -1,0 +1,24 @@
+name: Build Sites
+on:
+  push:
+    branches:
+      - main
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch WCSNG
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.WCSNG_PAT }}
+          repository: 'ucsdwcsng/ucsdwcsng.github.io'
+          event-type: dispatch-build
+          client-payload: '{}'
+      - name: Repository Dispatch DINESHB
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.DINESHB_PAT }}
+          repository: 'dineshb-ucsd/dineshb.github.io'
+          event-type: dispatch-build
+          client-payload: '{}'
+
